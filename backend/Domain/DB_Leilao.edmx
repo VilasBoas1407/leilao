@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_LEILAOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_LEILAO.dbo.TB_LEILAO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TB_LEILAO">
+          <Key>
+            <PropertyRef Name="ID_LEILAO" />
+            <PropertyRef Name="DS_NOME_LEILAO" />
+            <PropertyRef Name="VL_INICIAL" />
+            <PropertyRef Name="FL_PRODUTO_USUADO" />
+            <PropertyRef Name="ID_USUARIO_RESPONSAVEL" />
+            <PropertyRef Name="DT_ABERTURA" />
+            <PropertyRef Name="DT_FINALIZACAO" />
+          </Key>
+          <Property Name="ID_LEILAO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DS_NOME_LEILAO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="VL_INICIAL" Type="float" Nullable="false" />
+          <Property Name="FL_PRODUTO_USUADO" Type="bit" Nullable="false" />
+          <Property Name="ID_USUARIO_RESPONSAVEL" Type="int" Nullable="false" />
+          <Property Name="DT_ABERTURA" Type="datetime" Nullable="false" />
+          <Property Name="DT_FINALIZACAO" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TB_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DS_USUARIO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DS_SENHA" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="FL_ATIVO" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__TB_LEILAO__DT_FI__04E4BC85">
+          <End Role="TB_USUARIO" Type="Self.TB_USUARIO" Multiplicity="1" />
+          <End Role="TB_LEILAO" Type="Self.TB_LEILAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="TB_LEILAO">
+              <PropertyRef Name="ID_USUARIO_RESPONSAVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_LEILAOModelStoreContainer">
+          <EntitySet Name="TB_USUARIO" EntityType="Self.TB_USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TB_LEILAO" EntityType="Self.TB_LEILAO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TB_LEILAO].[ID_LEILAO] AS [ID_LEILAO], 
+    [TB_LEILAO].[DS_NOME_LEILAO] AS [DS_NOME_LEILAO], 
+    [TB_LEILAO].[VL_INICIAL] AS [VL_INICIAL], 
+    [TB_LEILAO].[FL_PRODUTO_USUADO] AS [FL_PRODUTO_USUADO], 
+    [TB_LEILAO].[ID_USUARIO_RESPONSAVEL] AS [ID_USUARIO_RESPONSAVEL], 
+    [TB_LEILAO].[DT_ABERTURA] AS [DT_ABERTURA], 
+    [TB_LEILAO].[DT_FINALIZACAO] AS [DT_FINALIZACAO]
+    FROM [dbo].[TB_LEILAO] AS [TB_LEILAO]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__TB_LEILAO__DT_FI__04E4BC85" Association="Self.FK__TB_LEILAO__DT_FI__04E4BC85">
+            <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
+            <End Role="TB_LEILAO" EntitySet="TB_LEILAO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_LEILAOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TB_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DS_USUARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DS_SENHA" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FL_ATIVO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TB_LEILAO" Relationship="Self.FK__TB_LEILAO__DT_FI__04E4BC85" FromRole="TB_USUARIO" ToRole="TB_LEILAO" />
+        </EntityType>
+        <EntityType Name="TB_LEILAO">
+          <Key>
+            <PropertyRef Name="ID_LEILAO" />
+            <PropertyRef Name="DS_NOME_LEILAO" />
+            <PropertyRef Name="VL_INICIAL" />
+            <PropertyRef Name="FL_PRODUTO_USUADO" />
+            <PropertyRef Name="ID_USUARIO_RESPONSAVEL" />
+            <PropertyRef Name="DT_ABERTURA" />
+            <PropertyRef Name="DT_FINALIZACAO" />
+          </Key>
+          <Property Name="ID_LEILAO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DS_NOME_LEILAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VL_INICIAL" Type="Double" Nullable="false" />
+          <Property Name="FL_PRODUTO_USUADO" Type="Boolean" Nullable="false" />
+          <Property Name="ID_USUARIO_RESPONSAVEL" Type="Int32" Nullable="false" />
+          <Property Name="DT_ABERTURA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DT_FINALIZACAO" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TB_USUARIO" Relationship="Self.FK__TB_LEILAO__DT_FI__04E4BC85" FromRole="TB_LEILAO" ToRole="TB_USUARIO" />
+        </EntityType>
+        <Association Name="FK__TB_LEILAO__DT_FI__04E4BC85">
+          <End Role="TB_USUARIO" Type="Self.TB_USUARIO" Multiplicity="1" />
+          <End Role="TB_LEILAO" Type="Self.TB_LEILAO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TB_USUARIO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="TB_LEILAO">
+              <PropertyRef Name="ID_USUARIO_RESPONSAVEL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_LEILAOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TB_USUARIO" EntityType="Self.TB_USUARIO" />
+          <EntitySet Name="TB_LEILAO" EntityType="Self.TB_LEILAO" />
+          <AssociationSet Name="FK__TB_LEILAO__DT_FI__04E4BC85" Association="Self.FK__TB_LEILAO__DT_FI__04E4BC85">
+            <End Role="TB_USUARIO" EntitySet="TB_USUARIO" />
+            <End Role="TB_LEILAO" EntitySet="TB_LEILAO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_LEILAOModelStoreContainer" CdmEntityContainer="DB_LEILAOEntities">
+          <EntitySetMapping Name="TB_USUARIO">
+            <EntityTypeMapping TypeName="DB_LEILAOModel.TB_USUARIO">
+              <MappingFragment StoreEntitySet="TB_USUARIO">
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="DS_USUARIO" ColumnName="DS_USUARIO" />
+                <ScalarProperty Name="DS_SENHA" ColumnName="DS_SENHA" />
+                <ScalarProperty Name="FL_ATIVO" ColumnName="FL_ATIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TB_LEILAO">
+            <EntityTypeMapping TypeName="DB_LEILAOModel.TB_LEILAO">
+              <MappingFragment StoreEntitySet="TB_LEILAO">
+                <ScalarProperty Name="ID_LEILAO" ColumnName="ID_LEILAO" />
+                <ScalarProperty Name="DS_NOME_LEILAO" ColumnName="DS_NOME_LEILAO" />
+                <ScalarProperty Name="VL_INICIAL" ColumnName="VL_INICIAL" />
+                <ScalarProperty Name="FL_PRODUTO_USUADO" ColumnName="FL_PRODUTO_USUADO" />
+                <ScalarProperty Name="ID_USUARIO_RESPONSAVEL" ColumnName="ID_USUARIO_RESPONSAVEL" />
+                <ScalarProperty Name="DT_ABERTURA" ColumnName="DT_ABERTURA" />
+                <ScalarProperty Name="DT_FINALIZACAO" ColumnName="DT_FINALIZACAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
