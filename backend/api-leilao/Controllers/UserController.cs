@@ -9,10 +9,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace api_leilao.Controllers
 {
-
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
 
@@ -46,14 +47,14 @@ namespace api_leilao.Controllers
                 if (User != null)
                 {
                     string token = tokenService.GenerateToken(User);
-                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, UserData = User, token = token });
+                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, UserData = User, token });
                 }
                 else
                     throw new Exception("Usuário ou senha inválidos!");
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, new { message = ex.Message });
+                return Request.CreateResponse(HttpStatusCode.OK, new {valid = false, message = ex.Message });
             }
         }
     }

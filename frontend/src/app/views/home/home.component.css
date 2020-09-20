@@ -1,0 +1,19 @@
+body{
+    background-color: aliceblue;
+}
+
+.body {
+    padding-left: 35%;
+    padding-top: 10%;
+    width: 30em;
+}
+
+.title{
+    text-align: center;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+  
+.full-width {
+    width: 100%;
+}

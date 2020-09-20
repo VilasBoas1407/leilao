@@ -14,7 +14,7 @@ namespace api_leilao.Controllers
     {
         LeilaoService leilaoService = new LeilaoService();
 
-        [Route("api/leilao/Insert")]
+        [Route("api/leilao")]
         [HttpPost]
         public async Task<HttpResponseMessage> Insert(TB_LEILAO Leilao)
         {
@@ -59,7 +59,7 @@ namespace api_leilao.Controllers
             }
         }
 
-        [Route("api/leilao/Update")]
+        [Route("api/leilao")]
         [HttpPut]
         public async Task<HttpResponseMessage> Update(TB_LEILAO Leilao)
         {
@@ -74,7 +74,7 @@ namespace api_leilao.Controllers
             }
         }
 
-        [Route("api/leilao/Delete")]
+        [Route("api/leilao")]
         [HttpDelete]
         public async Task<HttpResponseMessage> Delete(int ID_LEILAO)
         {
