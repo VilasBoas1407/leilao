@@ -15,14 +15,14 @@ $ cd leilao
  - Após clonar o projeto e executar ele irá rodar em https://localhost:44344/.
  - Após realizar o login você recebera um token de autenticação, que deverá ser passado no body das requisições como tokenAuth.
 ### Rotas
- [Post] - /api/user  : Cadastro de usúario
- [Get] - /api/user : Login de usuário
+ [Post] - /api/user  : Cadastro de usúario <br>
+ [Get] - /api/user : Login de usuário  <br>
  
-[Post] - /api/leilao : Cadastro de leilão
-[Get] - /api/leilao/GetAll : Lista todos os leilões
-[Get] - /api/leilao/GetById : Buscar leilão por id
-[Put] - /api/leilao : Atualizar leilão
-[Delete] - /api/leilao : Deletar leilão
+[Post] - /api/leilao : Cadastro de leilão  <br>
+[Get] - /api/leilao/GetAll : Lista todos os leilões  <br>
+[Get] - /api/leilao/GetById : Buscar leilão por id  <br>
+[Put] - /api/leilao : Atualizar leilão  <br>
+[Delete] - /api/leilao : Deletar leilão  <br>
 
 ### Sobre o FrontEnd
 Desenvolvido em Angular9 e utilizando a biblioteca de css MaterialUI.
