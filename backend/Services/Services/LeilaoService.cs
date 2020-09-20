@@ -24,7 +24,7 @@ namespace Services.Services
                 throw ex;
             }
         }
-        public async Task<List<TB_LEILAO>> GetAll()
+        public List<TB_LEILAO> GetAll()
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Services.Services
                 throw ex;
             }
         }
-        public async Task<TB_LEILAO> GetById(int ID_LEILAO)
+        public TB_LEILAO GetById(int ID_LEILAO)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace Services.Services
                 throw ex;
             }
         }
-        public async void Delete(int ID_LEILAO)
+        public void Delete(int ID_LEILAO)
         {
             try
             {
@@ -64,9 +64,9 @@ namespace Services.Services
             {
                 throw ex;
             }
-            
+
         }
-        public async void Update(TB_LEILAO Leilao)
+        public void Update(TB_LEILAO Leilao)
         {
             try
             {
@@ -79,19 +79,19 @@ namespace Services.Services
                 throw;
             }
         }
-        public async void ValidateFields(TB_LEILAO Leilao)
+        public void ValidateFields(TB_LEILAO Leilao)
         {
             try
             {
                 if (string.IsNullOrEmpty(Leilao.DS_NOME_LEILAO))
                     throw new Exception("Favor inserir um nome para o leilão!");
-                if(Leilao.DT_ABERTURA == null)
+                if (Leilao.DT_ABERTURA == null)
                     throw new Exception("A data de abertura não pode ser nula!");
-                if(Leilao.DT_FINALIZACAO == null)
+                if (Leilao.DT_FINALIZACAO == null)
                     throw new Exception("A data de finalização não pode ser nula!");
-                if(Leilao.DT_FINALIZACAO > Leilao.DT_ABERTURA)
+                if (Leilao.DT_FINALIZACAO > Leilao.DT_ABERTURA)
                     throw new Exception("A data de finalização não pode ser anterior a data de abertura!");
-                if(Leilao.ID_USUARIO_RESPONSAVEL == 0 || Leilao.ID_USUARIO_RESPONSAVEL == null)
+                if (Leilao.ID_USUARIO_RESPONSAVEL == 0 || Leilao.ID_USUARIO_RESPONSAVEL == null)
                     throw new Exception("Favor inserir um usuário responsável!");
             }
             catch (Exception ex)

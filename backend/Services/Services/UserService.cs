@@ -14,19 +14,22 @@ namespace Services.Services
         UserRepository userRepository = new UserRepository();
         HashService hashService = new HashService();
 
-        public async void InsertUser(TB_USUARIO User)
+        public void InsertUser(TB_USUARIO User)
         {
             bool validUser;
             try
             {
+
                 if (string.IsNullOrEmpty(User.DS_USUARIO) || string.IsNullOrEmpty(User.DS_SENHA))
                     throw new Exception("Favor preencher todos os campos!");
 
                 validUser = userRepository.ValidUser(User.DS_USUARIO);
 
                 if (!validUser)
+                {
                     throw new Exception("Usuário já cadastrado!");
-
+                }
+                User.FL_ATIVO = true;
                 User.DS_SENHA = hashService.CriptografarSenha(User.DS_SENHA);
                 userRepository.Insert(User);
 
@@ -38,7 +41,7 @@ namespace Services.Services
             }
         }
 
-        public async Task<TB_USUARIO> LoginUser(string DS_USUARIO, string DS_SENHA)
+        public TB_USUARIO LoginUser(string DS_USUARIO, string DS_SENHA)
         {
             try
             {
@@ -48,9 +51,24 @@ namespace Services.Services
                     throw new Exception("Favor preencher todos os campos!");
 
                 DS_SENHA = hashService.CriptografarSenha(DS_SENHA);
-                User = await userRepository.Login(DS_USUARIO, DS_SENHA);
+                User = userRepository.Login(DS_USUARIO, DS_SENHA);
 
                 return User;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<TB_USUARIO> GetAll()
+        {
+            List<TB_USUARIO> lstUsers = new List<TB_USUARIO>();
+
+            try
+            {
+                lstUsers = userRepository.GetAll();
+                return lstUsers;
             }
             catch (Exception ex)
             {

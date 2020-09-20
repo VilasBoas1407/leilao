@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MessageResponse } from '../model/message.model';
 import { UserResponse } from '../model/user.model';
 
 
@@ -23,5 +24,12 @@ export class UserService {
 
   public doLogin(DS_USUARIO: string, DS_SENHA: string): Observable<UserResponse> {
     return this.httpClient.get<UserResponse>(this.apiUrl + `user?DS_USUARIO=${DS_USUARIO}&DS_SENHA=${DS_SENHA}`)
+  }
+
+  public register(User: any): Observable<MessageResponse>{
+    return this.httpClient.post<MessageResponse>(this.apiUrl + 'user',User,this.httpOptions);
+  }
+  public getUsers() : Observable<UserResponse[]>{
+    return this.httpClient.get<UserResponse[]>(this.apiUrl+ 'users');
   }
 }

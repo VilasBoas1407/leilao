@@ -24,7 +24,7 @@ namespace Repository.Repositories
             return validUser;
         }
 
-        public async void Insert(TB_USUARIO user)
+        public void Insert(TB_USUARIO user)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Repository.Repositories
             }
         }
 
-        public async Task<TB_USUARIO> Login(string DS_USUARIO, string DS_SENHA)
+        public TB_USUARIO Login(string DS_USUARIO, string DS_SENHA)
         {
             TB_USUARIO user = new TB_USUARIO();
             try
@@ -55,5 +55,15 @@ namespace Repository.Repositories
             }
         }
 
+        public List<TB_USUARIO> GetAll()
+        {
+            List<TB_USUARIO> lstUsers = new List<TB_USUARIO>();
+
+            lstUsers = db.TB_USUARIO
+                .Where(u => u.FL_ATIVO == true)
+                .ToList();
+
+            return lstUsers;
+        }
     }
 }

@@ -1,0 +1,11 @@
+<body>
+    <mat-toolbar>
+        <mat-toolbar-row style="font-size:1.5rem; height: 80px;">
+            <span> Leilão  <mat-icon>account_balance</mat-icon></span>
+            <span class="example-spacer"></span>
+            <button mat-raised-button (click)="openLeilaoDialog()"><mat-icon>add</mat-icon> Leilão</button>
+            <button mat-raised-button style="margin-left: 5px;" color="warn" (click)="logOut()"><mat-icon>login</mat-icon> Sair</button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <app-list-leilao></app-list-leilao>
+</body>

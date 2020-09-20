@@ -22,27 +22,27 @@ namespace api_leilao.Controllers
 
         [Route("api/user")]
         [HttpPost]
-        public async Task<HttpResponseMessage> New(TB_USUARIO User)
+        public HttpResponseMessage New(TB_USUARIO User)
         {
             try
             {
                 userService.InsertUser(User);
-                return Request.CreateResponse(HttpStatusCode.OK, new { message = "Usuário cadastrado com sucesso!" });
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, message = "Usuário cadastrado com sucesso!" });
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, new { message = ex.Message });
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = false, message = ex.Message });
             }
         }
 
         [Route("api/user")]
         [HttpGet]
-        public async Task<HttpResponseMessage> Login(string DS_USUARIO, string DS_SENHA)
+        public HttpResponseMessage Login(string DS_USUARIO, string DS_SENHA)
         {
             try
             {
                 TB_USUARIO User = new TB_USUARIO();
-                User = await userService.LoginUser(DS_USUARIO, DS_SENHA);
+                User = userService.LoginUser(DS_USUARIO, DS_SENHA);
 
                 if (User != null)
                 {
@@ -54,7 +54,23 @@ namespace api_leilao.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new {valid = false, message = ex.Message });
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = false, message = ex.Message });
+            }
+        }
+
+        [Route("api/users")]
+        [HttpGet]
+        public HttpResponseMessage GetAll()
+        {
+            List<TB_USUARIO> lstUsers = new List<TB_USUARIO>();
+            try
+            {
+                lstUsers = userService.GetAll();
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, lstUsers });
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = false, message = ex.Message });
             }
         }
     }

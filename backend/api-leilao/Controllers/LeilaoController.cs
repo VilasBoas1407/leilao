@@ -16,7 +16,7 @@ namespace api_leilao.Controllers
 
         [Route("api/leilao")]
         [HttpPost]
-        public async Task<HttpResponseMessage> Insert(TB_LEILAO Leilao)
+        public HttpResponseMessage Insert(TB_LEILAO Leilao)
         {
             try
             {
@@ -31,11 +31,11 @@ namespace api_leilao.Controllers
 
         [Route("api/leilao/GetAll")]
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAll()
+        public HttpResponseMessage GetAll()
         {
             try
             {
-                List<TB_LEILAO> lstLeilao = await leilaoService.GetAll();
+                List<TB_LEILAO> lstLeilao = leilaoService.GetAll();
                 return Request.CreateResponse(HttpStatusCode.OK, new { lstLeilao });
             }
             catch (Exception ex)
@@ -46,11 +46,11 @@ namespace api_leilao.Controllers
         
         [Route("api/leilao/GetById")]
         [HttpGet]
-        public async Task<HttpResponseMessage> GetById(int ID_LEILAO)
+        public HttpResponseMessage GetById(int ID_LEILAO)
         {
             try
             {
-                TB_LEILAO Leilao = await leilaoService.GetById(ID_LEILAO);
+                TB_LEILAO Leilao =  leilaoService.GetById(ID_LEILAO);
                 return Request.CreateResponse(HttpStatusCode.OK, new { Leilao });
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace api_leilao.Controllers
 
         [Route("api/leilao")]
         [HttpPut]
-        public async Task<HttpResponseMessage> Update(TB_LEILAO Leilao)
+        public HttpResponseMessage Update(TB_LEILAO Leilao)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace api_leilao.Controllers
 
         [Route("api/leilao")]
         [HttpDelete]
-        public async Task<HttpResponseMessage> Delete(int ID_LEILAO)
+        public HttpResponseMessage Delete(int ID_LEILAO)
         {
             try
             {
