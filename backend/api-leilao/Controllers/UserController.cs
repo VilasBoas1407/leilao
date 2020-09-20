@@ -25,7 +25,7 @@ namespace api_leilao.Controllers
         {
             try
             {
-                User = await userService.InsertUser(User);
+                userService.InsertUser(User);
                 return Request.CreateResponse(HttpStatusCode.OK, new { message = "Usuário cadastrado com sucesso!" });
             }
             catch (Exception ex)

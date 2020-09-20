@@ -24,13 +24,12 @@ namespace Repository.Repositories
             return validUser;
         }
 
-        public async Task<TB_USUARIO> Insert(TB_USUARIO user)
+        public async void Insert(TB_USUARIO user)
         {
             try
             {
                 user = db.TB_USUARIO.Add(user);
                 db.SaveChanges();
-                return user;
             }
             catch (Exception ex)
             {

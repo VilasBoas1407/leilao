@@ -14,12 +14,12 @@ namespace Services.Services
         UserRepository userRepository = new UserRepository();
         HashService hashService = new HashService();
 
-        public async Task<TB_USUARIO> InsertUser(TB_USUARIO User)
+        public async void InsertUser(TB_USUARIO User)
         {
             bool validUser;
             try
             {
-                if (string.IsNullOrEmpty(User.DS_USUARIO) && !string.IsNullOrEmpty(User.DS_SENHA))
+                if (string.IsNullOrEmpty(User.DS_USUARIO) || string.IsNullOrEmpty(User.DS_SENHA))
                     throw new Exception("Favor preencher todos os campos!");
 
                 validUser = userRepository.ValidUser(User.DS_USUARIO);
@@ -28,10 +28,8 @@ namespace Services.Services
                     throw new Exception("Usuário já cadastrado!");
 
                 User.DS_SENHA = hashService.CriptografarSenha(User.DS_SENHA);
-                User = await userRepository.Insert(User);
+                userRepository.Insert(User);
 
-
-                return User;
 
             }
             catch (Exception ex)
