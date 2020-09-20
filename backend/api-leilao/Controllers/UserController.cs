@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain;
+using Repository.Repositories;
 using Services.Services;
 using System;
 using System.Collections.Generic;
@@ -16,23 +17,24 @@ namespace api_leilao.Controllers
     {
 
         UserService userService = new UserService();
+        TokenService tokenService = new TokenService();
 
         [Route("api/user")]
         [HttpPost]
         public async Task<HttpResponseMessage> New(TB_USUARIO User)
         {
             try
-            {                
+            {
                 User = await userService.InsertUser(User);
                 return Request.CreateResponse(HttpStatusCode.OK, new { message = "Usuário cadastrado com sucesso!" });
             }
             catch (Exception ex)
             {
-               return Request.CreateResponse(HttpStatusCode.BadRequest, new { message = ex.Message });
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new { message = ex.Message });
             }
         }
 
-        [Route ("api/user")]
+        [Route("api/user")]
         [HttpGet]
         public async Task<HttpResponseMessage> Login(string DS_USUARIO, string DS_SENHA)
         {
@@ -40,8 +42,12 @@ namespace api_leilao.Controllers
             {
                 TB_USUARIO User = new TB_USUARIO();
                 User = await userService.LoginUser(DS_USUARIO, DS_SENHA);
+
                 if (User != null)
-                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, UserData = User });
+                {
+                    string token = tokenService.GenerateToken(User);
+                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, UserData = User, token = token });
+                }
                 else
                     throw new Exception("Usuário ou senha inválidos!");
             }

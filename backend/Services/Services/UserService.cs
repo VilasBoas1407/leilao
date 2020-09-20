@@ -30,6 +30,7 @@ namespace Services.Services
                 User.DS_SENHA = hashService.CriptografarSenha(User.DS_SENHA);
                 User = await userRepository.Insert(User);
 
+
                 return User;
 
             }
