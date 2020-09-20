@@ -11,6 +11,7 @@ namespace Services.Services
     public class LeilaoService
     {
         LeilaoRepository leilaoRepository = new LeilaoRepository();
+
         public async void InsertLeilao(TB_LEILAO Leilao)
         {
             try
@@ -23,7 +24,62 @@ namespace Services.Services
                 throw ex;
             }
         }
-        public void ValidateFields(TB_LEILAO Leilao)
+        public async Task<List<TB_LEILAO>> GetAll()
+        {
+            try
+            {
+                List<TB_LEILAO> lstLeilao = leilaoRepository.GetAll();
+                return lstLeilao;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async Task<TB_LEILAO> GetById(int ID_LEILAO)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(ID_LEILAO.ToString()))
+                    throw new Exception("Favor passar um ID válido de leilão");
+
+                TB_LEILAO Leilao = leilaoRepository.GetById(ID_LEILAO);
+                return Leilao;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public async void Delete(int ID_LEILAO)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(ID_LEILAO.ToString()))
+                    throw new Exception("Favor passar um ID válido de leilão");
+
+                leilaoRepository.Delete(ID_LEILAO);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+        public async void Update(TB_LEILAO Leilao)
+        {
+            try
+            {
+                ValidateFields(Leilao);
+                leilaoRepository.Update(Leilao);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+        public async void ValidateFields(TB_LEILAO Leilao)
         {
             try
             {
@@ -40,7 +96,6 @@ namespace Services.Services
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

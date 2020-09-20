@@ -14,7 +14,7 @@ namespace api_leilao.Controllers
     {
         LeilaoService leilaoService = new LeilaoService();
 
-        [Route("api/leilao")]
+        [Route("api/leilao/Insert")]
         [HttpPost]
         public async Task<HttpResponseMessage> Insert(TB_LEILAO Leilao)
         {
@@ -29,13 +29,14 @@ namespace api_leilao.Controllers
             }
         }
 
-        [Route("api/leilao")]
+        [Route("api/leilao/GetAll")]
         [HttpGet]
         public async Task<HttpResponseMessage> GetAll()
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new { message = "ok" });
+                List<TB_LEILAO> lstLeilao = await leilaoService.GetAll();
+                return Request.CreateResponse(HttpStatusCode.OK, new { lstLeilao });
             }
             catch (Exception ex)
             {
@@ -43,13 +44,14 @@ namespace api_leilao.Controllers
             }
         }
         
-        [Route("api/leilao/{id}")]
+        [Route("api/leilao/GetById")]
         [HttpGet]
         public async Task<HttpResponseMessage> GetById(int ID_LEILAO)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new { message = "ok" });
+                TB_LEILAO Leilao = await leilaoService.GetById(ID_LEILAO);
+                return Request.CreateResponse(HttpStatusCode.OK, new { Leilao });
             }
             catch (Exception ex)
             {
@@ -57,13 +59,14 @@ namespace api_leilao.Controllers
             }
         }
 
-        [Route("api/leilao")]
+        [Route("api/leilao/Update")]
         [HttpPut]
         public async Task<HttpResponseMessage> Update(TB_LEILAO Leilao)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new { message = "ok" });
+                leilaoService.Update(Leilao);
+                return Request.CreateResponse(HttpStatusCode.OK, new { message = "Leilão atualizado com sucesso!" });
             }
             catch (Exception ex)
             {
@@ -71,13 +74,14 @@ namespace api_leilao.Controllers
             }
         }
 
-        [Route("api/leilao")]
+        [Route("api/leilao/Delete")]
         [HttpDelete]
         public async Task<HttpResponseMessage> Delete(int ID_LEILAO)
         {
             try
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new { message = "ok" });
+                leilaoService.Delete(ID_LEILAO);
+                return Request.CreateResponse(HttpStatusCode.OK, new { message = "Leilão excluído com sucesso!" });
             }
             catch (Exception ex)
             {
