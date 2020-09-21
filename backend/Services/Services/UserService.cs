@@ -1,5 +1,5 @@
 ﻿using Domain;
-
+using Domain.Classes;
 using Repository.Repositories;
 using System;
 using System.Collections.Generic;
@@ -41,19 +41,19 @@ namespace Services.Services
             }
         }
 
-        public TB_USUARIO LoginUser(string DS_USUARIO, string DS_SENHA)
+        public User LoginUser(string DS_USUARIO, string DS_SENHA)
         {
             try
             {
-                TB_USUARIO User = new TB_USUARIO();
+                User user = new User();
 
                 if (string.IsNullOrEmpty(DS_USUARIO) && !string.IsNullOrEmpty(DS_SENHA))
                     throw new Exception("Favor preencher todos os campos!");
 
                 DS_SENHA = hashService.CriptografarSenha(DS_SENHA);
-                User = userRepository.Login(DS_USUARIO, DS_SENHA);
+                user = userRepository.Login(DS_USUARIO, DS_SENHA);
 
-                return User;
+                return user;
             }
             catch (Exception ex)
             {
@@ -61,9 +61,9 @@ namespace Services.Services
             }
         }
 
-        public List<TB_USUARIO> GetAll()
+        public List<User> GetAll()
         {
-            List<TB_USUARIO> lstUsers = new List<TB_USUARIO>();
+            List<User> lstUsers = new List<User>();
 
             try
             {

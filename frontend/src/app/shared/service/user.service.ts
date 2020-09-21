@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ListUserResponse } from '../model/list-user.model';
 import { MessageResponse } from '../model/message.model';
 import { UserResponse } from '../model/user.model';
 
@@ -29,7 +30,7 @@ export class UserService {
   public register(User: any): Observable<MessageResponse>{
     return this.httpClient.post<MessageResponse>(this.apiUrl + 'user',User,this.httpOptions);
   }
-  public getUsers() : Observable<UserResponse[]>{
-    return this.httpClient.get<UserResponse[]>(this.apiUrl+ 'users');
+  public getUsers() : Observable<ListUserResponse>{
+    return this.httpClient.get<ListUserResponse>(this.apiUrl+ 'users');
   }
 }

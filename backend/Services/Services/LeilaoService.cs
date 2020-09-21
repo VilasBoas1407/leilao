@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Classes;
 using Repository.Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Services.Services
     {
         LeilaoRepository leilaoRepository = new LeilaoRepository();
 
-        public async void InsertLeilao(TB_LEILAO Leilao)
+        public void InsertLeilao(TB_LEILAO Leilao)
         {
             try
             {
@@ -24,11 +25,11 @@ namespace Services.Services
                 throw ex;
             }
         }
-        public List<TB_LEILAO> GetAll()
+        public List<Leilao> GetAll()
         {
             try
             {
-                List<TB_LEILAO> lstLeilao = leilaoRepository.GetAll();
+                List<Leilao> lstLeilao = leilaoRepository.GetAll();
                 return lstLeilao;
             }
             catch (Exception ex)
@@ -89,7 +90,7 @@ namespace Services.Services
                     throw new Exception("A data de abertura não pode ser nula!");
                 if (Leilao.DT_FINALIZACAO == null)
                     throw new Exception("A data de finalização não pode ser nula!");
-                if (Leilao.DT_FINALIZACAO > Leilao.DT_ABERTURA)
+                if (Leilao.DT_FINALIZACAO < Leilao.DT_ABERTURA)
                     throw new Exception("A data de finalização não pode ser anterior a data de abertura!");
                 if (Leilao.ID_USUARIO_RESPONSAVEL == 0 || Leilao.ID_USUARIO_RESPONSAVEL == null)
                     throw new Exception("Favor inserir um usuário responsável!");

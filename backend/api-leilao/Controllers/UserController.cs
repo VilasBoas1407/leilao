@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain;
+using Domain.Classes;
 using Repository.Repositories;
 using Services.Services;
 using System;
@@ -41,13 +42,13 @@ namespace api_leilao.Controllers
         {
             try
             {
-                TB_USUARIO User = new TB_USUARIO();
-                User = userService.LoginUser(DS_USUARIO, DS_SENHA);
+                User user = new User();
+                user = userService.LoginUser(DS_USUARIO, DS_SENHA);
 
                 if (User != null)
                 {
-                    string token = tokenService.GenerateToken(User);
-                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, UserData = User, token });
+                    user.TOKEN = tokenService.GenerateToken(user);
+                    return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, UserData = user });
                 }
                 else
                     throw new Exception("Usuário ou senha inválidos!");
@@ -62,11 +63,11 @@ namespace api_leilao.Controllers
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
-            List<TB_USUARIO> lstUsers = new List<TB_USUARIO>();
+            List<User> lstUser = new List<User>();
             try
             {
-                lstUsers = userService.GetAll();
-                return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, lstUsers });
+                lstUser = userService.GetAll();
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, lstUser });
             }
             catch (Exception ex)
             {

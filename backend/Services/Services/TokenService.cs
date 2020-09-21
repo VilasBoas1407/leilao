@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Classes;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Repository.Repositories
     public class TokenService
     {
 
-        public string GenerateToken(TB_USUARIO user)
+        public string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(Settings.Secret);

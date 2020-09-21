@@ -6,7 +6,7 @@ export class UserResponse{
         DS_USUARIO : string;
         DS_SENHA : string;
         FL_ATIVO : boolean;
+        TOKEN : string;
     }
-    token : string;
     message: string;
 }

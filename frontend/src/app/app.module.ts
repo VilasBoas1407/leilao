@@ -10,11 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatToolbarModule } from '@angular/material/toolbar';
-import {MatIconModule } from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatTableModule} from '@angular/material/table';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
 
 //Page Components
 import { HomeComponent } from './views/home/home.component';
@@ -49,9 +51,18 @@ import { LeilaoDialogComponent } from './views/leilao/leilao-dialog/leilao-dialo
     MatDialogModule,
     MatToolbarModule,
     MatIconModule,
-    MatTableModule
+    MatTableModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    NgxMaskModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+  constructor(){
+
+  }
+}

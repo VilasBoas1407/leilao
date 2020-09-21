@@ -1,21 +1,40 @@
-<div>
-    <form [formGroup]="userForm">
+<div class="body">
+    <form [formGroup]="leilaoForm">
         <mat-form-field class="full-width">
-            <mat-label class="label-input">Usuário</mat-label>
-            <input matInput formControlName="DS_USUARIO" name="DS_USUARIO">
+            <mat-label>Nome do Leilão</mat-label>
+            <input matInput formControlName="DS_NOME_LEILAO" name="DS_NOME_LEILAO">
         </mat-form-field>
         <mat-form-field class="full-width">
-            <mat-label class="label-input">Senha</mat-label>
-            <input matInput type="password" formControlName="DS_SENHA" name="DS_SENHA">
+            <mat-label>Valor Inicial</mat-label>
+            <input matInput type="text" formControlName="VL_INICIAL" name="VL_INICIAL" mask="separator.2" prefix="R$ " thousandSeparator="." >
         </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Produto Usado ? </mat-label>
+            <select matNativeControl formControlName="FL_PRODUTO_USADO" name="FL_PRODUTO_USADO">
+              <option value="Não" selected>Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Usuário Responsável</mat-label>
+            <select matNativeControl formControlName="ID_USUARIO_RESPONSAVEL" name="ID_USUARIO_RESPONSAVEL">
+              <option  *ngFor="let user of lstUsers.lstUser" [value]="user.ID_USUARIO">
+                  {{user.DS_USUARIO}}
+              </option>
+            </select>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Data de Início</mat-label>
+            <input matInput formControlName="DT_ABERTURA" name="DT_ABERTURA"  [dropSpecialCharacters]="false" mask="00/00/0000">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Data de Finalização</mat-label>
+            <input matInput formControlName="DT_FINALIZACAO" name="DT_FINALIZACAO" [dropSpecialCharacters]="false" mask="00/00/0000">
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="primary" (click)="Register()">Cadastrar</button>
+            <button mat-raised-button (click)="closeDialog()" style="margin-left: 5px;">Fechar</button>
+        </div>
 
-        <mat-grid-list cols="2">
-            <mat-grid-tile> 
-                <button mat-raised-button color="primary" (click)="Register()">Registrar</button>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <button mat-raised-button (click)="closeDialog()">Fechar</button>
-            </mat-grid-tile>
-        </mat-grid-list>
     </form>
 </div>

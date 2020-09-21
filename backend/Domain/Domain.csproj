@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Leilao.cs" />
+    <Compile Include="Classes\User.cs" />
     <Compile Include="DB_Leilao.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

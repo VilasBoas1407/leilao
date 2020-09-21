@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserResponse } from 'src/app/shared/model/user.model';
-import { UserService } from 'src/app/shared/service/user.service';
+import { LeilaoResponse } from 'src/app/shared/model/leilao.model';
+import { LeilaoService } from 'src/app/shared/service/leilao.service';
 
 
 
@@ -12,37 +11,22 @@ import { UserService } from 'src/app/shared/service/user.service';
 })
 export class ListLeilaoComponent implements OnInit {
 
-  public leilaoForm : FormGroup;
-  public lstUsers : UserResponse[];
+  public lstLeiloes : LeilaoResponse[];
+
 
   constructor(
-    private fb : FormBuilder,
-    public userService : UserService
+    public leilaoService : LeilaoService
   ) { }
 
   ngOnInit(): void {
-
-    this.leilaoForm = this.fb.group({
-        DS_NOME_LEILAO : ['', Validators.required],
-        VL_INICIAL : [0, Validators.required],
-        FL_PRODUTO_USADO : [0],
-        ID_USUARIO_RESPONSAVEL : [0, Validators.required],
-        DT_ABERTURA : ['', Validators.required],
-        DT_FINALIZACAO : ['', Validators.required]
-    });
-
-    this.getUsers();
+    this.getLeiloes();
   }
 
-  getUsers() {
-    this.userService.getUsers().subscribe(data => {
-      if(data.length > 0){
-        this.lstUsers = data;
-      }
-      else{
-        //Erro Dialog
-      }
+  getLeiloes(){
+    this.leilaoService.getAll().subscribe(data =>{
+      console.log(data);
     })
   }
+
 
 }

@@ -53,15 +53,14 @@ export class HomeComponent implements OnInit {
       this.openErrorDialog('Favor preencher todos os campos!')
     else{
       this.userService.doLogin(this.userForm.value.DS_USUARIO,this.userForm.value.DS_SENHA).subscribe(data =>{
-        console.log(data);
           if(data.valid){
             this.user = data;
             localStorage.setItem('user', this.user.UserData.ID_USUARIO.toString());
-            localStorage.setItem('token',this.user.token);
+            localStorage.setItem('token',this.user.UserData.TOKEN);
             this.router.navigate(['/leilao']);
           }
           else{
-          this.openErrorDialog(data.message)
+            this.openErrorDialog(data.message)
           }
       });
     }

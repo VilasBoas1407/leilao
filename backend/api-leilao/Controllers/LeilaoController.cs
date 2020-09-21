@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Classes;
 using Services.Services;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace api_leilao.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LeilaoController : ApiController
     {
         LeilaoService leilaoService = new LeilaoService();
@@ -35,8 +38,8 @@ namespace api_leilao.Controllers
         {
             try
             {
-                List<TB_LEILAO> lstLeilao = leilaoService.GetAll();
-                return Request.CreateResponse(HttpStatusCode.OK, new { lstLeilao });
+                List<Leilao> lstLeilao = leilaoService.GetAll();
+                return Request.CreateResponse(HttpStatusCode.OK, new { valid = true, lstLeilao });
             }
             catch (Exception ex)
             {
