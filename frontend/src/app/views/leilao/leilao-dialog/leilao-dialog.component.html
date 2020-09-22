@@ -11,8 +11,8 @@
         <mat-form-field class="full-width">
             <mat-label>Produto Usado ? </mat-label>
             <select matNativeControl formControlName="FL_PRODUTO_USADO" name="FL_PRODUTO_USADO">
-              <option value="Não" selected>Não</option>
-              <option value="Sim">Sim</option>
+              <option [value]="false">Não</option>
+              <option [value]="true">Sim</option>
             </select>
         </mat-form-field>
         <mat-form-field class="full-width">
@@ -32,7 +32,7 @@
             <input matInput formControlName="DT_FINALIZACAO" name="DT_FINALIZACAO" [dropSpecialCharacters]="false" mask="00/00/0000">
         </mat-form-field>
         <div>
-            <button mat-raised-button color="primary" (click)="Register()">Cadastrar</button>
+            <button mat-raised-button color="primary" (click)="Register()">{{labelButton}}</button>
             <button mat-raised-button (click)="closeDialog()" style="margin-left: 5px;">Fechar</button>
         </div>
 

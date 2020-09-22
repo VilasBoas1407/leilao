@@ -30,6 +30,7 @@ namespace Services.Services
             try
             {
                 List<Leilao> lstLeilao = leilaoRepository.GetAll();
+
                 return lstLeilao;
             }
             catch (Exception ex)

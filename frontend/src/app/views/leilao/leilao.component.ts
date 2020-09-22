@@ -25,8 +25,13 @@ export class LeilaoComponent implements OnInit {
   }
   
   openLeilaoDialog(){
-    this.dialog.open(LeilaoDialogComponent);
+    const dialogRef = this.dialog.open(LeilaoDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      window.location.reload();
+    });
   }
+
+
   
   logOut(){
     localStorage.removeItem('token');

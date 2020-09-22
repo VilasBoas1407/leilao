@@ -1,6 +1,57 @@
 <body>
     <h2 class="title">Listagem de leilões</h2>
 
+    <table mat-table [dataSource]="lstLeiloes" class="mat-elevation-z8">
 
+        <ng-container matColumnDef="DS_NOME_LEILAO">
+          <th mat-header-cell *matHeaderCellDef> Nome Leilão</th>
+          <td mat-cell *matCellDef="let element"> {{element.DS_NOME_LEILAO}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="DS_NOME_RESPONSAVEL">
+            <th mat-header-cell *matHeaderCellDef> Nome Usuário Responsável</th>
+            <td mat-cell *matCellDef="let element"> {{element.DS_NOME_RESPONSAVEL}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="DT_ABERTURA">
+            <th mat-header-cell *matHeaderCellDef> Data Abertura</th>
+            <td mat-cell *matCellDef="let element"> {{element.DT_ABERTURA | mask: '00/00/0000'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="DT_FINALIZACAO">
+            <th mat-header-cell *matHeaderCellDef> Data Finalização</th>
+            <td mat-cell *matCellDef="let element"> {{element.DT_FINALIZACAO | mask: '00/00/0000'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="FL_PRODUTO_USUADO">
+            <th mat-header-cell *matHeaderCellDef> Produto Usado ?</th>
+            <td mat-cell *matCellDef="let element"> 
+                <label *ngIf="element.FL_PRODUTO_USUADO == true"> Sim </label>
+                <label *ngIf="element.FL_PRODUTO_USUADO == false"> Não </label>
+             </td>
+        </ng-container>
+
+        <ng-container matColumnDef="VL_INICIAL">
+            <th mat-header-cell *matHeaderCellDef> Valor Inicial</th>
+            <td mat-cell *matCellDef="let element" > R${{element.VL_INICIAL | mask : 'separator.2' : '.'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="UPDATE">
+            <th mat-header-cell *matHeaderCellDef> Editar</th>
+            <td mat-cell *matCellDef="let element">  
+                <button mat-button color="primary" (click)="editLeilao(element)">Editar</button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="DELETE">
+            <th mat-header-cell *matHeaderCellDef> Deletar</th>
+            <td mat-cell *matCellDef="let element"> 
+                <button mat-button color="warn" (click)="deleteLeilao(element.ID_LEILAO)">Deletar</button>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
     
 </body>

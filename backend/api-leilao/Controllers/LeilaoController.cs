@@ -73,7 +73,7 @@ namespace api_leilao.Controllers
             }
             catch (Exception ex)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, new { message = ex.Message });
+                return Request.CreateResponse(HttpStatusCode.OK, new { message = ex.Message });
             }
         }
 
