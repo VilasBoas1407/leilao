@@ -5,15 +5,20 @@
 ### Instalação
  - Executar o script que está na pasta database/DB_LEILAO.sql
  - Clonar o repositório
+ - Instalar os pacotes com o npm 
+ - Iniciar o frontend
 ```sh
 $ cd git clone https://github.com/VilasBoas1407/leilao.git
 $ cd leilao
+$ cd frontend 
+$ npm install 
+$ ng serve --port 333 -o
 ```
 
 ### Sobre a API
  - Foi desenvolvida em C# com .Net Framework e utilizando o Entity framework para realizar as consultas no banco de dados.
  - Após clonar o projeto e executar ele irá rodar em https://localhost:44344/.
- - Após realizar o login você recebera um token de autenticação, que deverá ser passado no body das requisições como tokenAuth.
+ 
 ### Rotas
  [Post] - /api/user  : Cadastro de usúario <br>
  [Get] - /api/user : Login de usuário  <br>
